@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
-
     public CharacterController2D controller;
     public Animator animator;
 
@@ -25,8 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rigidbody_Player = GetComponent<Rigidbody2D>(); // присваиваем RB чтобы откидывать после смерти
-    }
-    
+    }    
 
     void Update()
     {
@@ -91,18 +90,16 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("Задел тригер смерти");
             animator.SetBool("IsDead", true);
-            rigidbody_Player.AddForce(new Vector2(x, y)); // откидываем персонажа
+            BouncePlayer();
             StartCoroutine(diePlayer());
-
         }
+        
+    }
 
-        if (other.gameObject.tag == "Enemy_Head")
-        {
-            rigidbody_Player.AddForce(new Vector2(x, y)); // откидываем персонажа
-        }
-
-
-
+    public void BouncePlayer()
+    {
+        Debug.Log("Откидываем перса");
+        rigidbody_Player.AddForce(new Vector2(x, y)); 
     }
 
     IEnumerator diePlayer() // соппрограмма 

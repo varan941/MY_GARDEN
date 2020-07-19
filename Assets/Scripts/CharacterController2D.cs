@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Utils;
 
 public class CharacterController2D : MonoBehaviour
 {

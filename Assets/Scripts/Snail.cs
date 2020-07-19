@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveSnail : MonoBehaviour
+public class Snail : AEnemy
 {
-
     public float speed = 1f;
     private float start_speed, end_speed;
     
@@ -14,17 +13,15 @@ public class MoveSnail : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
+        allColliders.AddRange(GetComponents<Collider2D>());
         start_speed = speed;
         end_speed = -speed;
     }
 
-
-
     void Update()
     {
-
         transform.Translate(Vector2.left * speed * Time.deltaTime); //вначале перс движеться влево
-
 
         if (transform.position.x < posit_lef_x)
         {
@@ -45,11 +42,9 @@ public class MoveSnail : MonoBehaviour
         {
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
         }
-    }
+    }    
 
 }
-
-
 
     //void Flip() // функция переворачивающая объект - спрайтом
     //{
