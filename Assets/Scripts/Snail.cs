@@ -5,58 +5,33 @@ using UnityEngine;
 public class Snail : AEnemy
 {
     public float speed = 1f;
-    private float start_speed, end_speed;
-    
-    public int flip_cheak = 1; // если значение 1 объект переворачивается
+    public float posit_lef_x = 10f, posit_righ_x = -1; 
 
-    public float posit_lef_x = 10f, posit_righ_x = -1; // левая и правая позиции куда летит объект
+    private bool _movingRight=false;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
         allColliders.AddRange(GetComponents<Collider2D>());
-        start_speed = speed;
-        end_speed = -speed;
+               
     }
 
     void Update()
     {
-        transform.Translate(Vector2.left * speed * Time.deltaTime); //вначале перс движеться влево
+        transform.Translate(Vector2.left * speed * Time.deltaTime); 
 
-        if (transform.position.x < posit_lef_x)
-        {
-            speed = end_speed;
-            Flip();
-        }
-
-        if (transform.position.x > posit_righ_x)
-        {
-            speed = start_speed;
-            Flip();
-        }
+        if (transform.position.x < posit_lef_x &&speed>0)        
+            Move(true);
+        
+        else if(transform.position.x > posit_righ_x && speed < 0)       
+            Move(false);        
     }
 
-    void Flip() // функция переворачивающая объект 
+    private void Move(bool flag)
     {
-        if (flip_cheak == 1)
-        {
-            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-        }
-    }    
-
+        _movingRight = flag;
+        speed *= -1;
+        sprite.flipX = _movingRight;
+    }
 }
-
-    //void Flip() // функция переворачивающая объект - спрайтом
-    //{
-    //    if (speed<0)
-    //    {
-    //        flip.flipX = true;
-    //    }
-    //    else
-    //    {
-    //        flip.flipX = false;
-    //    }
-
-   
-
-

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AnimDeth : MonoBehaviour
 {
-
     private AEnemy _aEnemy;
     public float time_anim = 1f;
 
@@ -12,6 +11,7 @@ public class AnimDeth : MonoBehaviour
     {
         _aEnemy = GetComponentInParent<AEnemy>();
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
 
@@ -22,8 +22,5 @@ public class AnimDeth : MonoBehaviour
 
             PlayerController.Instance.BouncePlayer();
         }
-    }
-
-
-  
+    }  
 }

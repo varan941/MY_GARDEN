@@ -5,11 +5,10 @@ using UnityEngine;
 public class AEnemy :MonoBehaviour
 {
     public int HP = 1;
-    [NonSerialized]public Animator animator;
+    [NonSerialized] public Animator animator;
+    [NonSerialized] public SpriteRenderer sprite;
     public List <Collider2D> allColliders;
-    
 
-   
     public void GetDamage(int count=0)
     {
         if (count != 0)
