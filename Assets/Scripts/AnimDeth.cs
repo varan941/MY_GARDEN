@@ -19,7 +19,6 @@ public class AnimDeth : MonoBehaviour
         {
             print("Задел голову");
             _aEnemy.GetDamage();
-
             PlayerController.Instance.BouncePlayer();
         }
     }  

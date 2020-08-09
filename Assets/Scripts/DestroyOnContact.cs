@@ -13,13 +13,13 @@ public class DestroyOnContact : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-        if (other.gameObject.tag == "Enemy_Head")
-        {
-            Debug.Log("Задел голову");
-            //other.transform.parent.gameObject.SetActive(false);// выключает тело врага
-            Destroy(other.transform.parent.gameObject, timedeth);// уничтожает рожительский компонент объекта
+        //if (other.gameObject.tag == "Enemy_Head")
+        //{
+        //    Debug.Log("Задел голову");
+            
+        //    Destroy(other.transform.parent.gameObject, timedeth);
             
             
-        }
+        //}
     }
 }

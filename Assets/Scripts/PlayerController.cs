@@ -10,7 +10,7 @@ public class PlayerController : Singleton<PlayerController>
 
     public float runSpeed = 40f;
 
-    public Joystick joystick; // фигня для управления
+    public Joystick joystick; 
 
     float horizontalMove = 0f;
     bool jump = false;
@@ -20,7 +20,7 @@ public class PlayerController : Singleton<PlayerController>
     Rigidbody2D rigidbody_Player;
 
     public GameObject respawn;
-    public float time_resp = 0.8f; // время респауна
+    public float time_resp = 0.8f; 
 
     private void Start()
     {
@@ -86,12 +86,10 @@ public class PlayerController : Singleton<PlayerController>
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Deadly" || other.tag == "Enemy") // если игрок попал в тег Deadly - запустится аним. смерти и корутина
+        if (other.tag == "Deadly" || other.tag == "Enemy") 
         {
-            Debug.Log("Задел тригер смерти");
-            animator.SetBool("IsDead", true);
-            BouncePlayer();
-            StartCoroutine(diePlayer());
+            Debug.Log("Задел тригер смерти");                     
+            GetDamage();
         }
         
     }
@@ -102,7 +100,14 @@ public class PlayerController : Singleton<PlayerController>
         rigidbody_Player.AddForce(new Vector2(x, y)); 
     }
 
-    IEnumerator diePlayer() // соппрограмма 
+    public void GetDamage()
+    {
+        animator.SetBool("IsDead", true);
+        BouncePlayer();
+        StartCoroutine(DiePlayer());
+    }
+
+    IEnumerator DiePlayer()  
     {
         yield return new WaitForSeconds(time_anim);
         animator.SetBool("IsDead", false); // выключение анимации
