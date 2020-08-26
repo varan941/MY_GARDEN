@@ -14,8 +14,7 @@ public class Snail : AEnemy
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         allColliders.AddRange(GetComponents<Collider2D>());
-        allColliders.AddRange(GetComponentsInChildren<Collider2D>());
-               
+        allColliders.AddRange(GetComponentsInChildren<Collider2D>());               
     }
 
     void Update()
