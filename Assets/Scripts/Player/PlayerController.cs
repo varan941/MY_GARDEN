@@ -104,16 +104,24 @@ public class PlayerController : Singleton<PlayerController>
     {
         animator.SetBool("IsDead", true);
         BouncePlayer();
-        StartCoroutine(DiePlayer());
+        StartCoroutine(DiePlayer(true));
     }
 
-    IEnumerator DiePlayer()  
+    public void Respawn()
     {
-        yield return new WaitForSeconds(time_anim);
-        animator.SetBool("IsDead", false); // выключение анимации
+        GameManager.Instance.RestartLevel();
+        //gameObject.transform.position = respawn.transform.position;
+    }
+
+    IEnumerator DiePlayer( bool needAnim)  
+    {
+        if (needAnim)
+        {
+            yield return new WaitForSeconds(time_anim);
+            animator.SetBool("IsDead", false);
+        }        
         yield return new WaitForSeconds(time_resp);
-        gameObject.transform.position = respawn.transform.position;// перемещает нас в респаун, если
-                                                                   // мы попадём в этот коллайдер
+        Respawn();
     }
 
 }
